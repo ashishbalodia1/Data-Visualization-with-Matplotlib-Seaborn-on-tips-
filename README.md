@@ -1,5 +1,9 @@
 # Data Visualization with Matplotlib & Seaborn
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=flat&logo=vercel)](https://data-visualization-with-matplotlib.vercel.app/)
+
+> 🌐 **Live Deployed Report**: [https://data-visualization-with-matplotlib.vercel.app/](https://data-visualization-with-matplotlib.vercel.app/)
+
 This project is part of the **InternCircle Data Science & AI** internship (Project 2).
 
 The objective is to create clear, honest charts from a real dataset using Matplotlib and Seaborn, following best data visualization practices (sensible chart types, honest axes, colorblind-friendly colors, and a clear one-line takeaway for every chart).
@@ -27,6 +31,7 @@ The objective is to create clear, honest charts from a real dataset using Matplo
 ## 📁 Project Structure
 
 ```text
+├── index.html                    # Responsive web dashboard (deployed on Vercel)
 ├── data_visualization.ipynb      # Main Jupyter Notebook with code, plots, and takeaways
 ├── visualize.py                  # Python script to generate all figures
 ├── tips.csv                      # Dataset (244 dining records)
