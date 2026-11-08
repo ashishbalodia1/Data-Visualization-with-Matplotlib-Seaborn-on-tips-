@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Visualization with Matplotlib & Seaborn | Tips Dataset</title>
+  <style>
+    :root {
+      --primary: #1f77b4;
+      --primary-dark: #155a8a;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --tag-bg: #e0f2fe;
+      --tag-text: #0369a1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--card-bg);
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin: 2.5rem 0 1rem 0;
+      color: #0f172a;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .question {
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .takeaway {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 0.85rem 1rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+    }
+
+    .takeaway strong {
+      color: #0f172a;
+    }
+
+    img.chart-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 1.7rem;
+      }
+    }
+
+    .table-container {
+      overflow-x: auto;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 0.85rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="badge">InternCircle Data Science & AI</div>
+      <h1>Data Visualization with Matplotlib & Seaborn</h1>
+      <p>Exploratory analysis of customer dining patterns, tipping behavior, and spend metrics on the Tips Dataset.</p>
+      
+      <div class="links">
+        <a href="https://github.com/ashishbalodia1/Data-Visualization-with-Matplotlib-Seaborn-on-tips-" target="_blank" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <a href="data_visualization.ipynb" download class="btn btn-outline">
+          📓 Download Notebook (.ipynb)
+        </a>
+      </div>
+    </header>
+
+    <!-- Overview Dashboard Section -->
+    <h2 class="section-title">Combined 2×2 Overview Dashboard</h2>
+    <div class="card">
+      <img src="tips_overview.png" alt="Tips Overview Dashboard" class="chart-img">
+      <div class="card-body">
+        <h3 class="card-title">Four Core Questions in One Unified Dashboard</h3>
+        <p class="takeaway">
+          <strong>Key Finding:</strong> Customer meal checks peak between $10 and $25 with a median of $17.80. Tipping follows a consistent upward trajectory with bill size, while weekends introduce significantly greater tip variance and higher outlier gratuities up to $10.00.
+        </p>
+      </div>
+    </div>
+
+    <!-- Summary Table -->
+    <h2 class="section-title">Summary of Questions & Takeaways</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Question</th>
+            <th>Chart Type</th>
+            <th>One-Line Takeaway</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td>How are bills distributed?</td>
+            <td><strong>Histogram + KDE</strong></td>
+            <td>Most bills are between $10 and $25 (median $17.80), with a right skew due to infrequent large parties.</td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td>Do tips differ by day?</td>
+            <td><strong>Box Plot</strong></td>
+            <td>Median tips are consistent (~$2.75–$3.00), but weekends show higher variance and outlier tips up to $10.</td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td>Does a bigger bill mean a bigger tip?</td>
+            <td><strong>Scatter Plot</strong></td>
+            <td>Bigger bills consistently bring bigger tips across both lunch and dinner sittings.</td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td>
+            <td>Which numbers move together?</td>
+            <td><strong>Correlation Heatmap</strong></td>
+            <td>Total bill and tip share the strongest correlation (r = 0.68), followed by party size and bill (r = 0.60).</td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td>Which day has the highest average bill?</td>
+            <td><strong>Bar Chart</strong> (Zero baseline)</td>
+            <td>Sunday has the highest average bill ($21.41), followed by Saturday ($20.44), while Thursday and Friday are lower.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Individual Charts Grid -->
+    <h2 class="section-title">Detailed Visualizations</h2>
+    <div class="grid">
+
+      <!-- Chart 1 -->
+      <div class="card">
+        <img src="figures/01_bill_distribution.png" alt="Distribution of Total Bills" class="chart-img">
+        <div class="card-body">
+          <div class="question">Q1: How are total bills distributed?</div>
+          <h3 class="card-title">Distribution of Total Bills</h3>
+          <div class="takeaway">
+            <strong>Takeaway:</strong> Most bills cluster between $10 and $25 (median $17.80), with a right-skewed tail representing occasional large dining checks.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 2 -->
+      <div class="card">
+        <img src="figures/02_tips_by_day.png" alt="Tips by Day" class="chart-img">
+        <div class="card-body">
+          <div class="question">Q2: Do tips differ across days of the week?</div>
+          <h3 class="card-title">Tips by Day of the Week</h3>
+          <div class="takeaway">
+            <strong>Takeaway:</strong> Median tip amounts stay steady around $2.75 to $3.00, but Saturday and Sunday exhibit higher spread and top outliers.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 3 -->
+      <div class="card">
+        <img src="figures/03_bill_vs_tip.png" alt="Total Bill vs Tip" class="chart-img">
+        <div class="card-body">
+          <div class="question">Q3: Does a bigger bill mean a bigger tip?</div>
+          <h3 class="card-title">Total Bill vs. Tip Amount</h3>
+          <div class="takeaway">
+            <strong>Takeaway:</strong> There is a clear positive trend showing larger bills yield higher tips across both lunch and dinner services.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 4 -->
+      <div class="card">
+        <img src="figures/04_correlation_heatmap.png" alt="Correlation Heatmap" class="chart-img">
+        <div class="card-body">
+          <div class="question">Q4: Which numerical features correlate most strongly?</div>
+          <h3 class="card-title">Correlation Matrix</h3>
+          <div class="takeaway">
+            <strong>Takeaway:</strong> Total bill and tip share the strongest correlation (r = 0.68), while party size has moderate influence on bill (r = 0.60).
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 5 -->
+      <div class="card">
+        <img src="figures/05_average_bill_by_day.png" alt="Average Bill by Day" class="chart-img">
+        <div class="card-body">
+          <div class="question">Q5: Which day has the highest average meal spend?</div>
+          <h3 class="card-title">Average Bill by Day</h3>
+          <div class="takeaway">
+            <strong>Takeaway:</strong> Sunday ($21.41) and Saturday ($20.44) lead in average dining check size, with the bar chart y-axis honestly starting at 0.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>Data Visualization Project | Created for InternCircle Internship | Powered by Python, Matplotlib & Seaborn</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
+
